@@ -1,11 +1,15 @@
 const {Router} = require("express")
-const {getBooks} = require("../controllers/booksController")
+const auth = require("../middlewares/books.auth")
+const {getBooks, deleteBook, deleteBookByFind} = require("../controllers/booksController")
 
 
 
 const router = Router();
 
-router.route("/books").get(getBooks)
+router.route("/books").get(auth, getBooks)
+router.delete("/books/:title", deleteBook)
 
 
-module.exports = router
+
+
+module.exports = router;
